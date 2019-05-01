@@ -1,0 +1,38 @@
+<%- include('header') %>
+
+
+  <h1>NASA News Search</h1>
+  <!-- back button takes the user to the index page -->
+  <button onclick="location.href='/'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Back
+    to Search</button></br>
+    
+    </br></br><h4> Search Results </h4>
+
+  </br><div class="col-md-12">
+    <table class='table table-hover table-responsive table-bordered'>
+      <thead style="border:1px solid" class="alert alert-info">
+        <th style="border:1px solid"><strong>Title</strong></th>
+        <th style="border:1px solid"><strong>Media Type</strong></th>
+        <th style="border:1px solid"><strong>Center</strong></th>
+        <th style="border:1px solid"><strong>Date Created</strong></th>
+        <th style="border:1px solid"><strong>Description</strong></th>
+        <th style="border:1px solid"><strong>Image</strong></th>
+      </thead>
+
+      <% objects_ham.forEach(object => { %>
+        <tr>
+          <td><%- object.title %> </td>
+          <td style="padding:10px; border:1px solid">
+              <img src="<%- object.primaryimageurl %>" style="width:400px" />
+          </td>
+          <td>From the Harvard Art Museum</td>
+        </tr>
+        <% }); %>
+
+      <% objects2.forEach(object => { %>
+        <tr>
+          <td><%- object.title %> </td>
+        </tr>
+        <% }); %>
+
+    </table>

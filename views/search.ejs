@@ -1,0 +1,42 @@
+<%- include('header') %>
+
+  
+  <h1>NASA News Search</h1>
+  <!-- back button takes the user to the index page -->
+  <button onclick="location.href='/'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Back
+    to Search</button></br>
+    <% if (userValue) { %>
+      </br><h4>You searched for:</h4>
+       <h6>Search: "<%- userValue.general_search %>" | Title: "<%- userValue.title %>" | Description: "<%- userValue.description %>" | Location: "<%- userValue.location %>" | Nasa Center: "<%- userValue.nasa_center %>"</h6>
+    <% } %>
+    </br></br><h4> Search Results </h4>
+
+  </br><div class="col-md-12">
+    <table class='table table-hover table-responsive table-bordered'>
+      <thead style="border:1px solid" class="alert alert-info">
+        <th style="border:1px solid"><strong>Title</strong></th>
+        <th style="border:1px solid"><strong>Media Type</strong></th>
+        <th style="border:1px solid"><strong>Center</strong></th>
+        <th style="border:1px solid"><strong>Date Created</strong></th>
+        <th style="border:1px solid"><strong>Description</strong></th>
+        <th style="border:1px solid"><strong>Image</strong></th>
+      </thead>
+
+    <% if (nasa) { %>
+      <% nasa.collection.items.forEach(object => { %>
+        <tr>
+          <td><%- object.data[0].title %> </td>
+          <td><%- object.data[0].media_type %> </td>
+          <td><%- object.data[0].center %></div> </td>
+          <td><%- object.data[0].date_created.substring(0,10) %> </td>
+          <td><div style="max-height:500px; overflow-y:scroll"><%- object.data[0].description %></div></td>
+          <% if (object.links) { %>
+            <td style="padding:10px; border:1px solid">
+              <img src="<%- object.links[0].href %>" style="width:400px" />
+            </td>
+          <% } %>
+        </tr>
+        <% }); %>
+    <% } %>
+
+    </table>
