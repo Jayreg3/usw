@@ -23,14 +23,14 @@ app.get("/", (req, res) => {
 
 //behavior for the search route, get method used to allow users to bookmark and return to a search
 app.get("/search", function(req,res){
-    var search = {
+    var search2 = {
         general_search : req.query.general_search,
-        title : req.query.title,
+        /*title : req.query.title,
         description : req.query.description,
         location : req.query.location,
         nasa_center : req.query.nasa_center,
         year_start : req.query.year_start,
-        year_end : req.query.year_end
+        year_end : req.query.year_end*/
     }
     var url;
     if (search.year_start && search.year_end){
@@ -52,10 +52,19 @@ app.get("/search", function(req,res){
         });
 });
 
-app.get("/search2", (req, res) => {
-    const url_ham = "https://api.harvardartmuseums.org/object?apikey=c2f10da0-b77e-11e8-a4d1-69890776a30b&keyword=civil%20war";
-    const url_wiki = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=Craig%20Noone";
-    const url_na = "https://api.harvardartmuseums.org/object?apikey=c2f10da0-b77e-11e8-a4d1-69890776a30b&keyword=civil%20war";
+app.get("/search2", function(req, res){
+    var search = {
+        general_search : req.query.general_search/*,
+        title : req.query.title,
+        description : req.query.description,
+        location : req.query.location,
+        nasa_center : req.query.nasa_center,
+        year_start : req.query.year_start,
+        year_end : req.query.year_end*/
+    }
+    const url_ham = `https://api.harvardartmuseums.org/object?apikey=c2f10da0-b77e-11e8-a4d1-69890776a30b&keyword=${search.general_search}`;
+    const url_wiki = `https://en.wikipedia.org/w/api.php?action=query&format=jsonfm&list=allimages&aifrom=${search.general_search}&ailimit=100`;
+    const url_na = `https://catalog.archives.gov/api/v1/?rows=10&q=${search.general_search}&resultTypes=object`;
     
     fetch(url_ham)
         .then(response => response.json())
@@ -65,12 +74,13 @@ app.get("/search2", (req, res) => {
     fetch(url_wiki)
         .then(response => response.json())
         .then(data => {
-            res.render("search2", { objects2: data.query.search, objects_ham: objects_ham });
+            objects_wiki = data.query.allimages;
         });
-    fetch("https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=Craig%20Noone")
+    fetch(url_na)
         .then(response => response.json())
         .then(data => {
-            res.render("search2", { objects2: data.query.search, objects1: objects });
+            objects_na = data.opaResponse.results.result;
+            res.render("search2", { objects_na: objects_na, objects_wiki: objects_wiki, objects_ham: objects_ham });
         });
 });
 

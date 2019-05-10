@@ -1,7 +1,7 @@
 <%- include('header') %>
 
 
-  <h1>NASA News Search</h1>
+  <h1>USW34 Artifact Search</h1>
   <!-- back button takes the user to the index page -->
   <button onclick="location.href='/'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Back
     to Search</button></br>
@@ -27,12 +27,20 @@
           </td>
           <td>From the Harvard Art Museum</td>
         </tr>
-        <% }); %>
+      <% }); %>
 
-      <% objects2.forEach(object => { %>
+      <% objects_wiki.forEach(object => { %>
         <tr>
-          <td><%- object.title %> </td>
+          <td><%- object.name %> </td>
+          <td style="padding:10px; border:1px solid">
+              <img src="<%- object.url %>" style="width:400px" />
+          </td>
+          <td style="padding:10px; border:1px solid">
+              <img src="<%- object.descriptionurl %>" style="width:400px" />
+          </td>
+          <td>From the Wiki</td>
         </tr>
-        <% }); %>
+      <% }); %>
+
 
     </table>
