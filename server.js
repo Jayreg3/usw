@@ -63,7 +63,7 @@ app.get("/search2", function(req, res){
         year_end : req.query.year_end*/
     }
     const url_ham = `https://api.harvardartmuseums.org/object?apikey=c2f10da0-b77e-11e8-a4d1-69890776a30b&keyword=${search.general_search}`;
-    const url_wiki = `https://en.wikipedia.org/w/api.php?action=query&format=jsonfm&list=allimages&aifrom=${search.general_search}&ailimit=100`;
+    const url_wiki = `https://en.wikipedia.org/w/api.php?action=query&format=json&list=allimages&aifrom=${search.general_search}&ailimit=100`;
     const url_na = `https://catalog.archives.gov/api/v1/?rows=10&q=${search.general_search}&resultTypes=object`;
     
     fetch(url_ham)

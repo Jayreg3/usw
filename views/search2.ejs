@@ -44,9 +44,15 @@
 
       <% objects_na.forEach(object => { %>
         <tr>
-          <td><%- object.publicContributions.text %> </td>
+          <% if (object.publicContributions) { %>
+            <% if (object.publicContributions.transcrition) { %>
+              <% if (object.publicContributions.transcription.text) { %>
+                <td><%- object.publicContributions.transcription["text"] %> </td>
+              <% }; %>
+            <% }; %>
+          <% }; %>
           <td style="padding:10px; border:1px solid">
-              <img src="<%- object.objects.object.file.@url %>" style="width:400px" />
+              <img src="<%- object.objects.object.file["@url"] %>" style="width:400px" />
           </td>
           <td>From the NA</td>
         </tr>
