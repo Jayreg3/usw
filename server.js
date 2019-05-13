@@ -15,6 +15,8 @@ app.set("views", path.join(__dirname, "views"));
 var objects_ham;
 var objects_wiki;
 var objects_na;
+const API_KEY = "c2f10da0-b77e-11e8-a4d1-69890776a30b";
+
 
 // behavior for the index route
 app.get("/", (req, res) => {
@@ -62,7 +64,7 @@ app.get("/search2", function(req, res){
         year_start : req.query.year_start,
         year_end : req.query.year_end*/
     }
-    const url_ham = `https://api.harvardartmuseums.org/object?apikey=c2f10da0-b77e-11e8-a4d1-69890776a30b&keyword=${search.general_search}`;
+    const url_ham = `https://api.harvardartmuseums.org/object?apikey=${API_KEY}&keyword=${search.general_search}`;
     const url_wiki = `https://en.wikipedia.org/w/api.php?action=query&format=json&list=allimages&aifrom=${search.general_search}&ailimit=100`;
     const url_na = `https://catalog.archives.gov/api/v1/?rows=10&q=${search.general_search}&resultTypes=object`;
     
@@ -81,6 +83,17 @@ app.get("/search2", function(req, res){
         .then(data => {
             objects_na = data.opaResponse.results.result;
             res.render("search2", { objects_na: objects_na, objects_wiki: objects_wiki, objects_ham: objects_ham });
+        });
+});
+
+app.get("/ham/:object_id", function(req, res) {
+    const url = `https://api.harvardartmuseums.org/object/${
+        req.params.object_id
+    }?apikey=${API_KEY}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            res.render("object", {object: data});
         });
 });
 

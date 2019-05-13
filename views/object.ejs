@@ -1,0 +1,18 @@
+<%- include('header') %>
+  <h1>
+    Object
+  </h1>
+  </br><strong>Title:</strong> <%- object.title %>
+  </br><strong>Description:</strong> <%- object.description %>
+  </br>Culture: <%- object.culture %>
+  </br>Classification: <%- object.classification %>
+  </br>Medium: <%- object.medium %>
+  </br>Technique: <%- object.technique %>
+  </br>Century: <%- object.century %>
+  </br>Date: <%- object.dated %>
+  </br>Provenance: <%- object.provenance %>
+  </br>Credit: <%- object.creditline %>
+  </br>Url: <a href="<%- object.url %>" target="_blank"><%- object.url %></a>
+  </br>Copyright: <%- object.copyright %>
+  </br><img id="my_img" src="<%= object.primaryimageurl %>" alt="" width=1000>
+
