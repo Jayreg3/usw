@@ -1,24 +1,30 @@
 {
-  "name": "USW Search",
+  "name": "uswsearch",
   "version": "1.0.0",
-  "description": "Project for US@34",
+  "description": "App built for USW final project",
   "main": "server.js",
+  "dependencies": {
+    "cross-fetch": "^3.0.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jayreg3/usw.git"
   },
+  "keywords": [
+    "USW",
+    "search"
+  ],
   "author": "Jerry Registre",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Jayreg3/usw/issues"
   },
-  "homepage": "https://github.com/Jayreg3/usw#readme",
-  "dependencies": {
-    "cross-fetch": "^3.0.1",
-    "ejs": "^2.6.1",
-    "express": "^4.16.4"
-  }
+  "homepage": "https://github.com/Jayreg3/usw#readme"
 }
