@@ -1,21 +1,21 @@
 {
-  "name": "capitalone",
+  "name": "USW Search",
   "version": "1.0.0",
-  "description": "Project for capital one program",
+  "description": "Project for US@34",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jayreg3/CapOne.git"
+    "url": "git+https://github.com/Jayreg3/usw.git"
   },
   "author": "Jerry Registre",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Jayreg3/CapOne/issues"
+    "url": "https://github.com/Jayreg3/usw/issues"
   },
-  "homepage": "https://github.com/Jayreg3/CapOne#readme",
+  "homepage": "https://github.com/Jayreg3/usw#readme",
   "dependencies": {
     "cross-fetch": "^3.0.1",
     "ejs": "^2.6.1",
