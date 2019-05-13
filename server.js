@@ -6,8 +6,8 @@ const bodyParser = require("body-parser");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
-const host = "127.0.0.1";
-const port = 3001;
+const host = "0.0.0.0";
+const port = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
