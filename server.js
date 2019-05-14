@@ -70,22 +70,35 @@ app.get("/search2", function(req, res){
     const url_wam = `http://api.thewalters.org/v1/objects.json?keyword=${search.general_search}&apikey=${WAM_API}`;
     const url_na = `https://catalog.archives.gov/api/v1/?rows=10&q=${search.general_search}&resultTypes=object`;
     
-    fetch(url_ham)
+    const fetch_ham = fetch(url_ham)
         .then(response => response.json())
         .then(data => {
-            objects_ham = data.records;
+            return data.records;
         });
-    fetch(url_wam)
+    const fetch_wam = fetch(url_wam)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            else {
+                return {Items:[]};
+            }
+        })
+        .then(data => {
+            console.log(data);
+            return data.Items;
+        });
+    const fetch_na = fetch(url_na)
         .then(response => response.json())
         .then(data => {
-            objects_wam = data.Items;
+            return data.opaResponse.results.result;
         });
-    fetch(url_na)
-        .then(response => response.json())
-        .then(data => {
-            objects_na = data.opaResponse.results.result;
-            res.render("search2", { objects_na: objects_na, objects_wam: objects_wam, objects_ham: objects_ham });
-        });
+    const combined = Promise.all([fetch_ham, fetch_wam, fetch_na]).then((values)=>{
+        console.log(values[1]);
+        res.render("search2", { objects_ham: values[0], objects_wam: values[1], objects_na: values[2] });
+    }) 
+    //res.render("search2", { objects_na: objects_na, objects_wam: objects_wam, objects_ham: objects_ham });
+
 });
 
 app.get("/ham/:object_id", function(req, res) {
