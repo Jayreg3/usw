@@ -13,9 +13,11 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 var objects_ham;
-var objects_wiki;
+var objects_wam;
 var objects_na;
-const API_KEY = "c2f10da0-b77e-11e8-a4d1-69890776a30b";
+const HAM_API = "c2f10da0-b77e-11e8-a4d1-69890776a30b";
+const WAM_API = "nU1c0CMd7XHRpdi8njZIrOKyx81gghK5vjE0OnZczN5m9Cxfo2n0ahVO93erAfxQ";
+
 
 
 // behavior for the index route
@@ -64,8 +66,8 @@ app.get("/search2", function(req, res){
         year_start : req.query.year_start,
         year_end : req.query.year_end*/
     }
-    const url_ham = `https://api.harvardartmuseums.org/object?apikey=${API_KEY}&keyword=${search.general_search}`;
-    const url_wiki = `https://en.wikipedia.org/w/api.php?action=query&format=json&list=allimages&aifrom=${search.general_search}&ailimit=100`;
+    const url_ham = `https://api.harvardartmuseums.org/object?apikey=${HAM_API}&keyword=${search.general_search}`;
+    const url_wam = `http://api.thewalters.org/v1/objects.json?keyword=${search.general_search}&apikey=${WAM_API}`;
     const url_na = `https://catalog.archives.gov/api/v1/?rows=10&q=${search.general_search}&resultTypes=object`;
     
     fetch(url_ham)
@@ -73,27 +75,36 @@ app.get("/search2", function(req, res){
         .then(data => {
             objects_ham = data.records;
         });
-    fetch(url_wiki)
+    fetch(url_wam)
         .then(response => response.json())
         .then(data => {
-            objects_wiki = data.query.allimages;
+            objects_wam = data.Items;
         });
     fetch(url_na)
         .then(response => response.json())
         .then(data => {
             objects_na = data.opaResponse.results.result;
-            res.render("search2", { objects_na: objects_na, objects_wiki: objects_wiki, objects_ham: objects_ham });
+            res.render("search2", { objects_na: objects_na, objects_wam: objects_wam, objects_ham: objects_ham });
         });
 });
 
 app.get("/ham/:object_id", function(req, res) {
     const url = `https://api.harvardartmuseums.org/object/${
         req.params.object_id
-    }?apikey=${API_KEY}`;
+    }?apikey=${HAM_API}`;
     fetch(url)
         .then(response => response.json())
         .then(data => {
             res.render("object", {object: data});
+        });
+});
+
+app.get("/wam/:object_id", function(req, res) {
+    const url = `http://api.thewalters.org/v1/objects/${req.params.object_id}.json?&apikey=${WAM_API}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            res.render("object_wam", {object: data.Data});
         });
 });
 

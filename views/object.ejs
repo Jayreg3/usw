@@ -3,16 +3,48 @@
     Object
   </h1>
   </br><strong>Title:</strong> <%- object.title %>
-  </br><strong>Description:</strong> <%- object.description %>
-  </br>Culture: <%- object.culture %>
-  </br>Classification: <%- object.classification %>
-  </br>Medium: <%- object.medium %>
-  </br>Technique: <%- object.technique %>
-  </br>Century: <%- object.century %>
-  </br>Date: <%- object.dated %>
-  </br>Provenance: <%- object.provenance %>
-  </br>Credit: <%- object.creditline %>
+
+  <% if (object.description) { %>
+    </br><strong>Description:</strong> <%- object.description %>     
+  <% }; %>
+
+  <% if (object.culture) { %>
+    </br>Culture: <%- object.culture %>          
+  <% }; %>
+
+  <% if (object.classification) { %>
+    </br>Classification: <%- object.classification %>          
+  <% }; %>
+
+  <% if (object.technique) { %>
+    </br>Technique: <%- object.technique %>          
+  <% }; %>
+
+  <% if (object.medium) { %>
+    </br>Medium: <%- object.medium %>          
+  <% }; %>
+
+  <% if (object.century) { %>
+    </br>Century: <%- object.century %>          
+  <% }; %>
+
+  <% if (object.dated) { %>
+    </br>Date: <%- object.dated %>          
+  <% }; %>
+
+  <% if (object.provenance) { %>
+    </br>Provenance: <%- object.provenance %>          
+  <% }; %>
+
+  <% if (object.creditline) { %>
+    </br>Credit: <%- object.creditline %>          
+  <% }; %>
+
   </br>Url: <a href="<%- object.url %>" target="_blank"><%- object.url %></a>
-  </br>Copyright: <%- object.copyright %>
+
+  <% if (object.copyright) { %>
+    </br>Copyright: <%- object.copyright %>          
+  <% }; %>
+
   </br><img id="my_img" src="<%= object.primaryimageurl %>" alt="" width=1000>
 

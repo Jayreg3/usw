@@ -1,0 +1,45 @@
+<%- include('header') %>
+  <h1>
+    Object
+  </h1>
+  </br><strong>Title:</strong> <%- object.Title %>
+
+  <% if (object.Description) { %>
+    </br><strong>Description:</strong> <%- object.Description %>     
+  <% }; %>
+
+  <% if (object.Culture) { %>
+    </br>Culture: <%- object.Culture %>          
+  <% }; %>
+
+  <% if (object.Classification) { %>
+    </br>Classification: <%- object.Classification %>          
+  <% }; %>
+
+  <% if (object.Medium) { %>
+    </br>Medium: <%- object.Medium %>          
+  <% }; %>
+
+  <% if (object.DateText) { %>
+    </br>Date: <%- object.DateText %>          
+  <% }; %>
+
+   <% if (object.Period) { %>
+    </br>Period: <%- object.Period %>          
+  <% }; %>
+
+  <% if (object.Provenance) { %>
+    </br>Provenance: <%- object.Provenance %>          
+  <% }; %>
+
+  <% if (object.Creditline) { %>
+    </br>Credit: <%- object.Creditline %>          
+  <% }; %>
+
+  </br>Url: <a href="<%- object.url %>" target="_blank"><%- object.ResourceURL %></a>
+
+  </br><% object.Images.forEach (image => { %>
+    <img src="<%= image.ImageURLs.Raw %>" alt="" width=1000>
+  <% }) %>
+  
+
